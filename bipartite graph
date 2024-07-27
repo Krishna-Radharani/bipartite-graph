@@ -1,0 +1,39 @@
+class Solution {
+public:
+   bool function(vector<vector<int>>&graph,int v,vector<int>&color,int start){
+        queue<int>q;
+        q.push(start);
+        color[start]=0;
+        while(!q.empty()){
+            auto front=q.front();
+            q.pop();
+            for(auto i:graph[front]){
+                if(color[i]==-1){
+                    color[i]=!color[front];
+                    q.push(i);
+                }
+                else if(color[i]==color[front]){
+                    return false;
+                    break;
+                }
+            }
+
+        }
+        return true;
+ }
+    bool isBipartite(vector<vector<int>>& graph) {
+        //using bfs
+        int v=graph.size();
+       vector<int>color(v,-1);
+        for(int i=0;i<graph.size();i++){
+        if(color[i]==-1){
+             if(!function(graph,v,color,i)){
+                   return false;
+             }
+        }
+    }
+        
+        return true;
+        
+    }
+};
